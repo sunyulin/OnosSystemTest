@@ -199,6 +199,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         ovsdbport = main.params[ 'CTRL' ][ 'ovsdbport' ]
         delaytime = main.params[ 'TIMER' ][ 'delaytime' ]
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "Set ovsdb node manager" )
         assignResult = main.OVSDB1.setManager( ip=ctrlip, port=ovsdbport, delaytime=delaytime )
