@@ -125,7 +125,7 @@ class OnosDriver( CLI ):
 
             if self.handle:
                 self.handle.sendline( "cd " + self.home )
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
                 return self.handle
             else:
                 main.log.info( "Failed to create ONOS handle" )
@@ -148,7 +148,7 @@ class OnosDriver( CLI ):
         try:
             if self.handle:
                 self.handle.sendline( "" )
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
                 self.handle.sendline( "exit" )
                 self.handle.expect( "closed" )
         except pexpect.EOF:
@@ -175,7 +175,7 @@ class OnosDriver( CLI ):
         try:
             self.handle.sendline( 'date +%s.%N' )
             self.handle.expect( 'date \+\%s\.\%N' )
-            self.handle.expect( '\$' )
+            self.handle.expect( '#|\$' )
             epochMs = self.handle.before
             return epochMs
         except Exception:
@@ -254,10 +254,10 @@ class OnosDriver( CLI ):
                            str( self.name ) +
                            ". This may take some time." )
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             if not skipTest:
                 self.handle.sendline( "mvn clean install" )
@@ -296,7 +296,7 @@ class OnosDriver( CLI ):
                         if "Total time:" in line:
                             main.log.info( line )
                     self.handle.sendline( "" )
-                    self.handle.expect( "\$", timeout=60 )
+                    self.handle.expect( "#|\$", timeout=60 )
                     return main.TRUE
                 elif i == 5:
                     main.log.error(
@@ -343,7 +343,7 @@ class OnosDriver( CLI ):
             # main.log.info( self.name + ": Stopping ONOS" )
             # self.stop()
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( self.home + "\$" )
+            self.handle.expect( self.home + "#|\$" )
             cmd = "git pull"
             if comp1 != "":
                 cmd += ' ' +  comp1
@@ -372,7 +372,7 @@ class OnosDriver( CLI ):
             if i == 0:
                 main.log.error( self.name + ": Git pull had some issue" )
                 output = self.handle.after
-                self.handle.expect( '\$' )
+                self.handle.expect( '#|\$' )
                 output += self.handle.before
                 main.log.warn( output )
                 return main.ERROR
@@ -385,7 +385,7 @@ class OnosDriver( CLI ):
                 main.log.info(
                     self.name +
                     ": Git Pull - pulling repository now" )
-                self.handle.expect( self.home + "\$", 120 )
+                self.handle.expect( self.home + "#|\$", 120 )
             # So that only when git pull is done, we do mvn clean compile
                 return main.TRUE
             elif i == 3:
@@ -428,7 +428,7 @@ class OnosDriver( CLI ):
                                 " but a swap file exists." )
                 try:
                     self.handle.send( 'A' )  # Abort
-                    self.handle.expect( "\$" )
+                    self.handle.expect( "#|\$" )
                     return main.ERROR
                 except Exception:
                     main.log.exception( "Couldn't exit editor prompt!")
@@ -476,7 +476,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( self.home + "\$" )
+            self.handle.expect( self.home + "#|\$" )
             main.log.info( self.name +
                            ": Checking out git branch/ref: " + branch + "..." )
             cmd = "git checkout " + branch
@@ -512,7 +512,7 @@ class OnosDriver( CLI ):
                 main.log.info(
                     self.name +
                     ": Git Checkout %s : Already on this branch" % branch )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 # main.log.info( "DEBUG: after checkout cmd = "+
                 # self.handle.before )
                 return main.TRUE
@@ -520,7 +520,7 @@ class OnosDriver( CLI ):
                 main.log.info(
                     self.name +
                     ": Git checkout %s - Switched to this branch" % branch )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 # main.log.info( "DEBUG: after checkout cmd = "+
                 # self.handle.before )
                 return main.TRUE
@@ -537,7 +537,7 @@ class OnosDriver( CLI ):
                     "Your local changes to the following files would" +
                     " be overwritten by checkout:" +
                     str( self.handle.before ) )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 return main.ERROR
             elif i == 6:
                 main.log.error(
@@ -545,7 +545,7 @@ class OnosDriver( CLI ):
                     ": Git checkout error: \n" +
                     "You need to resolve your current index first:" +
                     str( self.handle.before ) )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 return main.ERROR
             elif i == 7:
                 main.log.info(
@@ -553,13 +553,13 @@ class OnosDriver( CLI ):
                     ": Git checkout " + str( branch ) +
                     " - You are in 'detached HEAD' state. HEAD is now at " +
                     str( branch ) )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 return main.TRUE
             elif i == 8:  # Already in detached HEAD on the specified commit
                 main.log.info(
                     self.name +
                     ": Git Checkout %s : Already on commit" % branch )
-                self.handle.expect( self.home + "\$" )
+                self.handle.expect( self.home + "#|\$" )
                 return main.TRUE
             else:
                 main.log.error(
@@ -583,10 +583,10 @@ class OnosDriver( CLI ):
         main.log.info( "self.home = " )
         main.log.info( self.home )
         self.handle.sendline( "cd " + self.home )
-        self.handle.expect( self.home + "\$" )
+        self.handle.expect( self.home + "#|\$" )
         self.handle.sendline( "git name-rev --name-only HEAD" )
         self.handle.expect( "git name-rev --name-only HEAD" )
-        self.handle.expect( "\$" )
+        self.handle.expect( "#|\$" )
 
         lines =  self.handle.before.splitlines()
         if lines[1] == "master":
@@ -604,7 +604,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline(
                 "cd " +
                 self.home +
@@ -613,11 +613,11 @@ class OnosDriver( CLI ):
             # NOTE: for some reason there are backspaces inserted in this
             # phrase when run from Jenkins on some tests
             self.handle.expect( "never" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             response = ( self.name + ": \n" + str(
                 self.handle.before + self.handle.after ) )
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             lines = response.splitlines()
             for line in lines:
                 print line
@@ -757,7 +757,7 @@ class OnosDriver( CLI ):
                 handleAfter = self.handle.after
                 # Get the rest of the handle
                 self.handle.sendline("")
-                self.handle.expect("\$")
+                self.handle.expect("#|\$")
                 handleMore = self.handle.before
 
                 cell_result = handleBefore + handleAfter + handleMore
@@ -788,14 +788,14 @@ class OnosDriver( CLI ):
         try:
             # Clean handle by sending empty and expecting $
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-verify-cell" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             handleBefore = self.handle.before
             handleAfter = self.handle.after
             # Get the rest of the handle
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             handleMore = self.handle.before
 
             main.log.info( "Verify cell returned: " + handleBefore +
@@ -866,7 +866,7 @@ class OnosDriver( CLI ):
 
         main.log.error("CFG SET FAILURE: " + configName + " " + configParam )
         main.ONOSbench.handle.sendline("onos $OC1 cfg get")
-        main.ONOSbench.handle.expect("\$")
+        main.ONOSbench.handle.expect("#|\$")
         print main.ONOSbench.handle.before
         main.ONOSbench.logReport( ONOSIp, ["ERROR","WARN","EXCEPT"], "d")
         return main.FALSE
@@ -898,17 +898,17 @@ class OnosDriver( CLI ):
 
             cmdstr = str( cmdstr )
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             self.handle.sendline( "onos -w " + ONOSIp + " " + cmdstr )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             handleBefore = self.handle.before
             print "handle_before = ", self.handle.before
             # handleAfter = str( self.handle.after )
 
             # self.handle.sendline( "" )
-            # self.handle.expect( "\$" )
+            # self.handle.expect( "#|\$" )
             # handleMore = str( self.handle.before )
 
             main.log.info( "Command sent successfully" )
@@ -991,7 +991,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-service " + str( nodeIp ) +
                                   " start" )
             i = self.handle.expect( [
@@ -1027,7 +1027,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-service " + str( nodeIp ) +
                                   " stop" )
             i = self.handle.expect( [
@@ -1068,9 +1068,9 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$", timeout=60 )
+            self.handle.expect( "#|\$", timeout=60 )
             self.handle.sendline( "onos-uninstall " + str( nodeIp ) )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             main.log.info( "ONOS " + nodeIp + " was uninstalled" )
 
@@ -1097,7 +1097,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             cmdStr = "onos-kill " + str( nodeIp )
             self.handle.sendline( cmdStr )
             i = self.handle.expect( [
@@ -1129,10 +1129,10 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-kill " + str( nodeIp ) )
             i = self.handle.expect( [
-                "\$",
+                "#|\$",
                 "No\sroute\sto\shost",
                 "password:",
                 pexpect.TIMEOUT ], timeout=20 )
@@ -1176,18 +1176,18 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-remove-raft-logs" )
             # Sometimes this command hangs
-            i = self.handle.expect( [ "\$", pexpect.TIMEOUT ],
+            i = self.handle.expect( [ "#|\$", pexpect.TIMEOUT ],
                                     timeout=120 )
             if i == 1:
-                i = self.handle.expect( [ "\$", pexpect.TIMEOUT ],
+                i = self.handle.expect( [ "#|\$", pexpect.TIMEOUT ],
                                         timeout=120 )
                 if i == 1:
                     return main.FALSE
             #self.handle.sendline( "" )
-            #self.handle.expect( "\$" )
+            #self.handle.expect( "#|\$" )
             return main.TRUE
 
         except pexpect.EOF:
@@ -1219,7 +1219,7 @@ class OnosDriver( CLI ):
 
             mntopo = str( mntopo )
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             self.handle.sendline( "onos-start-network " + mntopo )
             self.handle.expect( "mininet>" )
@@ -1248,7 +1248,7 @@ class OnosDriver( CLI ):
             self.handle.sendline("onos-wait-for-start " + node )
             self.handle.expect("onos-wait-for-start")
             # NOTE: this timeout is arbitrary"
-            i = self.handle.expect(["\$", pexpect.TIMEOUT], timeout)
+            i = self.handle.expect(["#|\$", pexpect.TIMEOUT], timeout)
             if i == 0:
                 main.log.info( self.name + ": " + node + " is up" )
                 return main.TRUE
@@ -1257,7 +1257,7 @@ class OnosDriver( CLI ):
                 #   we will kill it on timeout
                 main.log.error( "ONOS has not started yet" )
                 self.handle.send( "\x03" )  # Control-C
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
                 return main.FALSE
         except pexpect.EOF:
             main.log.error( self.name + ": EOF exception found" )
@@ -1433,13 +1433,13 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             self.handle.sendline( "tshark -i " + str( interface ) + " -t e -w " + str( dirFile ) + " &" )
             self.handle.sendline( "\n" )
             self.handle.expect( "Capturing on" )
             self.handle.sendline( "\n" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             main.log.info( "Tshark started capturing files on " +
                            str( interface ) + " and saving to directory: " +
@@ -1467,7 +1467,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             cmd = "onos-topo-cfg "
             self.handle.sendline( cmd + str( onosIp ) + " " + jsonFile )
             handle = self.handle.before
@@ -1476,7 +1476,7 @@ class OnosDriver( CLI ):
                 main.log.error( self.name + ":    " + self.handle.before )
                 return main.FALSE
             else:
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
                 return main.TRUE
 
         except pexpect.EOF:
@@ -1504,7 +1504,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "" )
             if grepOptions:
                 grepStr = "grep "+str(grepOptions)
@@ -1524,7 +1524,7 @@ class OnosDriver( CLI ):
             main.log.info(cmd)
             self.handle.expect( "Capturing on" )
             self.handle.sendline( "\n" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
         except pexpect.EOF:
             main.log.error( self.name + ": EOF exception found" )
             main.log.error( self.name + ":    " + self.handle.before )
@@ -1569,8 +1569,8 @@ class OnosDriver( CLI ):
             i = self.handle.expect( [
                 "Multiple",
                 "Error",
-                "\$" ] )
-            self.handle.expect( "\$" )
+                "#|\$" ] )
+            self.handle.expect( "#|\$" )
 
             if i == 0:
                 handle = self.handle.before
@@ -1632,12 +1632,12 @@ class OnosDriver( CLI ):
                                       str( destDir ) + str( copyFileName ) +
                                       localtime )
                 self.handle.expect( "cp" )
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
             else:
                 self.handle.sendline( "cp " + str( logToCopy ) +
                                       " " + str( destDir ) )
                 self.handle.expect( "cp" )
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
 
             return self.handle.before
 
@@ -1680,7 +1680,7 @@ class OnosDriver( CLI ):
         """
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "onos-service " + str( node ) +
                                   " status" )
             i = self.handle.expect( [
@@ -1769,7 +1769,7 @@ class OnosDriver( CLI ):
                 # -D is the 'delete' rule of iptables
                 actionFlag = '-D'
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             cmd = "sudo iptables " + actionFlag + " " +\
                   direction +\
                   " -s " + str( ip )
@@ -1785,7 +1785,7 @@ class OnosDriver( CLI ):
             cmd += " -j " + str( rule )
 
             self.handle.sendline( cmd )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             main.log.warn( self.handle.before )
 
             info_string = "On " + str( self.name )
@@ -1819,11 +1819,11 @@ class OnosDriver( CLI ):
         import re
         try:
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             self.handle.sendline( "service onos status" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             response = self.handle.before
             if re.search( "onos start/running", response ):
                 # onos start/running, process 10457
@@ -2146,7 +2146,7 @@ class OnosDriver( CLI ):
                   str( ip ) + ":" + mnPath + fileName
 
             self.handle.sendline( "" )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
 
             main.log.info( self.name + ": Execute: " + cmd )
 
@@ -2165,7 +2165,7 @@ class OnosDriver( CLI ):
                 main.log.info( self.name + ": File " + fileName +
                                 " has been copied!" )
                 self.handle.sendline( "" )
-                self.handle.expect( "\$" )
+                self.handle.expect( "#|\$" )
                 return main.TRUE
 
         except pexpect.EOF:

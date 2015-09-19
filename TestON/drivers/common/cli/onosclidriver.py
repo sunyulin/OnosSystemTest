@@ -81,7 +81,7 @@ class OnosCliDriver( CLI ):
                 home=self.home )
 
             self.handle.sendline( "cd " + self.home )
-            self.handle.expect( "\$" )
+            self.handle.expect( "#|\$" )
             if self.handle:
                 return self.handle
             else:
@@ -110,7 +110,7 @@ class OnosCliDriver( CLI ):
                 i = self.logout()
                 if i == main.TRUE:
                     self.handle.sendline( "" )
-                    self.handle.expect( "\$" )
+                    self.handle.expect( "#|\$" )
                     self.handle.sendline( "exit" )
                     self.handle.expect( "closed" )
         except TypeError:
@@ -138,11 +138,11 @@ class OnosCliDriver( CLI ):
         try:
             if self.handle:
                 self.handle.sendline( "" )
-                i = self.handle.expect( [ "onos>", "\$", pexpect.TIMEOUT ],
+                i = self.handle.expect( [ "onos>", "#|\$", pexpect.TIMEOUT ],
                                         timeout=10 )
                 if i == 0:  # In ONOS CLI
                     self.handle.sendline( "logout" )
-                    self.handle.expect( "\$" )
+                    self.handle.expect( "#|\$" )
                     return main.TRUE
                 elif i == 1:  # not in CLI
                     return main.TRUE
@@ -187,7 +187,7 @@ class OnosCliDriver( CLI ):
                 handleAfter = self.handle.after
                 # Get the rest of the handle
                 self.handle.sendline("")
-                self.handle.expect("\$")
+                self.handle.expect("#|\$")
                 handleMore = self.handle.before
 
                 main.log.info( "Cell call returned: " + handleBefore +
@@ -227,7 +227,7 @@ class OnosCliDriver( CLI ):
         try:
             self.handle.sendline( "" )
             x = self.handle.expect( [
-                "\$", "onos>" ], commandlineTimeout)
+                "#|\$", "onos>" ], commandlineTimeout)
 
             if x == 1:
                 main.log.info( "ONOS cli is already running" )
@@ -246,7 +246,7 @@ class OnosCliDriver( CLI ):
                         "config:property-set -p org.apache.karaf.shell\
                                  sshIdleTimeout " +
                         karafTimeout )
-                    self.handle.expect( "\$" )
+                    self.handle.expect( "#|\$" )
                     self.handle.sendline( "onos -w " + str( ONOSIp ) )
                     self.handle.expect( "onos>" )
                 return main.TRUE
@@ -265,7 +265,7 @@ class OnosCliDriver( CLI ):
                             "config:property-set -p org.apache.karaf.shell\
                                     sshIdleTimeout " +
                             karafTimeout )
-                        self.handle.expect( "\$" )
+                        self.handle.expect( "#|\$" )
                         self.handle.sendline( "onos -w " + str( ONOSIp ) )
                         self.handle.expect( "onos>" )
                     return main.TRUE
@@ -301,7 +301,7 @@ class OnosCliDriver( CLI ):
                 lvlStr = "--level=" + level
 
             self.handle.sendline( "" )
-            i = self.handle.expect( [ "onos>","\$", pexpect.TIMEOUT ] )
+            i = self.handle.expect( [ "onos>","#|\$", pexpect.TIMEOUT ] )
             if i == 1:
                 main.log.error( self.name + ": onos cli session closed." )
                 main.cleanup()
@@ -344,11 +344,11 @@ class OnosCliDriver( CLI ):
             logStr = "\"Sending CLI command: '" + cmdStr + "'\""
             self.log( logStr )
             self.handle.sendline( cmdStr )
-            i = self.handle.expect( ["onos>", "\$", pexpect.TIMEOUT] )
+            i = self.handle.expect( ["onos>", "#|\$", pexpect.TIMEOUT] )
             response = self.handle.before
             if i == 2:
                 self.handle.sendline()
-                self.handle.expect( ["\$", pexpect.TIMEOUT] )
+                self.handle.expect( ["#|\$", pexpect.TIMEOUT] )
                 response += self.handle.before
                 print response
                 try:

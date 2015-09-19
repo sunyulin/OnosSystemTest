@@ -46,9 +46,9 @@ class RemoteSysDriver( CLI ):
             self.execute( cmd= "\n",prompt= "\$|>|#",timeout= 10 )
             self.execute( cmd= "ssh -l paxterra 10.128.4.1",prompt= "paxterra@10.128.4.1's password:",timeout= 10 )
             self.execute( cmd= "\n",prompt= "paxterra@10.128.4.1's password:",timeout= 10 )
-            self.execute( cmd="0nLab_gu3st",prompt="\$",timeout=10 )
-            self.execute( cmd="cd TestON/bin/",prompt="\$",timeout=10 )
-            self.execute( cmd="./cli.py run Assert example 1",prompt="\$",timeout=10 )
+            self.execute( cmd="0nLab_gu3st",prompt="#|\$",timeout=10 )
+            self.execute( cmd="cd TestON/bin/",prompt="#|\$",timeout=10 )
+            self.execute( cmd="./cli.py run Assert example 1",prompt="#|\$",timeout=10 )
             self.execute( cmd= "\n",prompt= "$",timeout= 10 )
             #self.execute( cmd="help",prompt=">",timeout=10 )
 
