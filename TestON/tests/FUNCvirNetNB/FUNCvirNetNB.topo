@@ -3,8 +3,8 @@
 
         <ONOSbench>
             <host>localhost</host>
-            <user>admin</user>
-            <password>onos_test</password>
+            <user>root</user>
+            <password>root</password>
             <type>OnosDriver</type>
             <connect_order>1</connect_order>
             <COMPONENTS>
@@ -13,8 +13,8 @@
 
         <ONOScli1>
             <host>localhost</host>
-            <user>admin</user>
-            <password>onos_test</password>
+            <user>root</user>
+            <password>root</password>
             <type>OnosCliDriver</type>
             <connect_order>2</connect_order>
             <COMPONENTS> </COMPONENTS>
@@ -22,8 +22,8 @@
 
         <ONOS1>
             <host>OC1</host>
-            <user>sdn</user>
-            <password>rocks</password>
+            <user>root</user>
+            <password>root</password>
             <type>OnosDriver</type>
             <connect_order>3</connect_order>
             <COMPONENTS> </COMPONENTS>
@@ -31,8 +31,8 @@
 
         <ONOSrest>
             <host>OC1</host>
-            <user>sdn</user>
-            <password>rocks</password>
+            <user>root</user>
+            <password>root</password>
             <type>OnosRestDriver</type>
             <connect_order>4</connect_order>
             <COMPONENTS> </COMPONENTS>
@@ -40,8 +40,8 @@
 
         <Mininet1>
             <host>OCN</host>
-            <user>admin</user>
-            <password>onos_test</password>
+            <user>root</user>
+            <password>root</password>
             <type>MininetCliDriver</type>
             <connect_order>5</connect_order>
             <COMPONENTS>
