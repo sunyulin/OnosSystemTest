@@ -165,7 +165,7 @@ if __name__=="__main__":
     agentusername = "root"
     agentpassword = "root"
 
-    print "Test Begin...."
+    print "Test Begin....."
     Gensshkey()
     AddEnvIntoBashrc("source onos/tools/dev/bash_profile")
     SSHlogin("10.1.0.1",masterusername,masterpassword)
