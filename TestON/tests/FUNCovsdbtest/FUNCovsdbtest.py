@@ -257,6 +257,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         ovsdbport = main.params[ 'CTRL' ][ 'ovsdbport' ]
         delaytime = main.params[ 'TIMER' ][ 'delaytime' ]
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "ovsdb node 1 set ovs manager to " + str( ctrlip ) )
         assignResult = main.OVSDB1.setManager( ip=ctrlip, port=ovsdbport, delaytime=delaytime )
@@ -356,6 +358,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         ovsdbport = main.params[ 'CTRL' ][ 'ovsdbport' ]
         delaytime = main.params[ 'TIMER' ][ 'delaytime' ]
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "ovsdb node 1 set ovs manager to " + str( ctrlip ) )
         assignResult = main.OVSDB1.setManager( ip=ctrlip, port=ovsdbport, delaytime=delaytime )
@@ -459,6 +463,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         ovsdbport = main.params[ 'CTRL' ][ 'ovsdbport' ]
         delaytime = main.params[ 'TIMER' ][ 'delaytime' ]
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "ovsdb node 1 set ovs manager to onos" )
         assignResult = main.OVSDB1.setManager( ip=ctrlip, port=ovsdbport, delaytime=delaytime )
@@ -516,6 +522,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params['CTRL']['ip1'] )
         httpport = main.params['HTTP']['port']
         path = main.params['HTTP']['path']
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "Generate Post Data" )
         network = NetworkData()
@@ -596,6 +604,8 @@ class FUNCovsdbtest:
         ctrlip = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         ovsdbport = main.params[ 'CTRL' ][ 'ovsdbport' ]
         delaytime = main.params[ 'TIMER' ][ 'delaytime' ]
+        OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
+        OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
 
         main.step( "ovsdb node 1 set ovs manager to " + str( ctrlip ) )
         assignResult = main.OVSDB1.setManager( ip=ctrlip, port=ovsdbport, delaytime=delaytime )

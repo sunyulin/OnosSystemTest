@@ -1,9 +1,26 @@
+#Function Test Framework
+#
+#   lanqinglong@huawei.com
+#   2015-9-19
+#
 import os
 import os.path
 import time
 import pexpect
 import re
 import sys
+
+def SSHlogin(ipaddr,username,password):
+    login = pexpect.spawn('ssh %s@%s'%(username,ipaddr))
+    index = 0
+    while index != 2:
+        index = login.expect(['password:','yes/no','#|$',pexpect.EOF])
+        if index == 0:
+            login.sendline(password)
+            login.interact()
+        if index == 1:
+            login.sendline('yes')
+    print "Login Success!"
 
 def DownLoadCode():
     print '\033[1;31;40m'
@@ -25,7 +42,6 @@ def CleanEnv():
     print "Done!"
 
 def OnosPushKeys(cmd,password):
-
     print '\033[1;31;40m'
     print "Now Pushing Onos Keys:"+cmd
     print "\033[0m"
@@ -41,11 +57,27 @@ def OnosPushKeys(cmd,password):
             print("Push keys Error!")
     print "Done!"
 
+def AddEnvIntoBashrc(name):
+    print '\033[1;31;40m'
+    print "Now Adding bash environment"
+    print "\033[0m"
+    fileopen = open(".bashrc",'r')
+    findContext = 1
+    while findContext:
+        findContext = fileopen.readline()
+        result = findContext.find('dev/bash_profile')
+        if result != -1:
+            break
+    fileopen.close
+    if result == -1:
+        envAdd = open(".bashrc",'a+')
+        envAdd.writelines("\nsource ~/onos/tools/dev/bash_profile")
+        envAdd.close()
+
 def SetEnvVar(masterpass,agentpass):
     print '\033[1;31;40m'
     print "Now Setting test environment"
     print "\033[0m"
-    os.system("source onos/tools/dev/bash_profile")
     os.environ["OCT"] = "10.1.0.1"
     os.environ["OC1"] = "10.1.0.50"
     os.environ["OC2"] = "10.1.0.51"
@@ -89,7 +121,9 @@ def ChangeOnosName(user,password):
            line[i]=line[i].replace("sdn",user)
        if "ONOS_PWD" in line[i]:
            line[i]=line[i].replace("rocks",password)
-    open("onos/tools/build/envDefaults",'w').writelines(line)
+    NewFile = open("onos/tools/build/envDefaults",'w')
+    NewFile.writelines(line)
+    NewFile.close
     print "Done!"
 
 def ChangeTestCasePara(testcase,user,password):
@@ -110,7 +144,9 @@ def ChangeTestCasePara(testcase,user,password):
           or "OCN2" in line[i]:
            line[i+1]=re.sub(">\w+",">root",line[i+1])
            line[i+2]=re.sub(">\w+",">root",line[i+2]) 
-    open(filepath,'w').writelines(line) 
+    NewFile = open(filepath,'w')
+    NewFile.writelines(line) 
+    NewFile.close
     print "Done!"
 
 def RunScript(testname,masterusername,masterpassword):
@@ -130,8 +166,10 @@ if __name__=="__main__":
     agentpassword = "root"
 
     print "Test Begin...."
-    ChangeOnosName(agentusername,agentpassword)
-    Gensshkey() 
+    Gensshkey()
+    AddEnvIntoBashrc("source onos/tools/dev/bash_profile")
+    SSHlogin("10.1.0.1",masterusername,masterpassword)
+    ChangeOnosName(agentusername,agentpassword) 
     DownLoadCode()
     CleanEnv()
     SetEnvVar(masterpassword,agentpassword)
