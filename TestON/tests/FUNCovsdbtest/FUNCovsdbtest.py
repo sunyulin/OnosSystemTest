@@ -54,7 +54,7 @@ class FUNCovsdbtest:
         ipList = os.getenv( main.params[ 'CTRL' ][ 'ip1' ] )
         OVSDB1Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip1' ] )
         OVSDB2Ip = os.getenv( main.params[ 'OVSDB' ][ 'ip2' ] )
-
+        """
         main.step( "Create cell file" )
         cellAppString = main.params[ 'ENV' ][ 'cellApps' ]
         main.ONOSbench.createCellFile( main.ONOSbench.ip_address, cellName,
@@ -67,7 +67,7 @@ class FUNCovsdbtest:
 
         main.log.info( "Removing raft logs" )
         main.ONOSbench.onosRemoveRaftLogs()
-
+        """
         main.CLIs = []
         main.nodes = []
         main.numCtrls= 1
@@ -80,6 +80,7 @@ class FUNCovsdbtest:
             except AttributeError:
                 break
 
+        """
         main.log.info( "Uninstalling ONOS" )
         for node in main.nodes:
             main.ONOSbench.onosUninstall( node.ip_address )
@@ -129,7 +130,7 @@ class FUNCovsdbtest:
         utilities.assert_equals( expect=main.TRUE, actual=onosInstallResult,
                                  onpass="ONOS install successful",
                                  onfail="ONOS install failed" )
-
+        """
         main.step( "Checking if ONOS is up yet" )
         print main.nodes[0].ip_address
         for i in range( 2 ):
@@ -159,7 +160,7 @@ class FUNCovsdbtest:
             main.log.error( "Failed to start ONOS,stopping test" )
             main.cleanup()
             main.exit()
-
+        """
         main.step( "Install onos-ovsdatabase" )
         installResults = main.ONOScli1.activateApp( "org.onosproject.ovsdb" )
         utilities.assert_equals( expect=main.TRUE, actual=installResults,
@@ -183,7 +184,7 @@ class FUNCovsdbtest:
         utilities.assert_equals( expect=main.TRUE, actual=installResults,
                                  onpass="Install onos-app-vtnweb successful",
                                  onfail="Install onos-app-vtnweb failed" )
-
+        """
     def CASE2( self, main ):
 
         """

@@ -14,13 +14,33 @@ def SSHlogin(ipaddr,username,password):
     login = pexpect.spawn('ssh %s@%s'%(username,ipaddr))
     index = 0
     while index != 2:
-        index = login.expect(['password:','yes/no','#|$',pexpect.EOF])
+        index = login.expect(['assword:','yes/no','#|$',pexpect.EOF])
         if index == 0:
             login.sendline(password)
             login.interact()
         if index == 1:
             login.sendline('yes')
     print "Login Success!"
+
+def AddKarafUser(ipaddr,username,password):
+    print '\033[1;31;40m'
+    print "Now Adding karaf user to OC1..."
+    print "\033[0m"
+    login = pexpect.spawn("ssh -l %s -p 8101 %s"%(username,ipaddr))
+    index = 0
+    while index != 2:
+        index = login.expect(['assword:','yes/no',pexpect.EOF])
+        if index == 0:
+            login.sendline(password)
+            login.sendline("logout")
+            index = login.expect(["closed",pexpect.EOF])
+            if index == 0:
+                print "Add SSH Known Host Success!"
+            else:
+                print "Add SSH Known Host Failed! Please Check!"
+            login.interact()
+        if index == 1:
+            login.sendline('yes')
 
 def DownLoadCode():
     print '\033[1;31;40m'
@@ -61,7 +81,7 @@ def AddEnvIntoBashrc(name):
     print '\033[1;31;40m'
     print "Now Adding bash environment"
     print "\033[0m"
-    fileopen = open(".bashrc",'r')
+    fileopen = open("/etc/profile",'r')
     findContext = 1
     while findContext:
         findContext = fileopen.readline()
@@ -70,8 +90,8 @@ def AddEnvIntoBashrc(name):
             break
     fileopen.close
     if result == -1:
-        envAdd = open(".bashrc",'a+')
-        envAdd.writelines("\nsource ~/onos/tools/dev/bash_profile")
+        envAdd = open("/etc/profile",'a+')
+        envAdd.writelines("\nsource /root/onos/tools/dev/bash_profile")
         envAdd.close()
 
 def SetEnvVar(masterpass,agentpass):
@@ -86,6 +106,7 @@ def SetEnvVar(masterpass,agentpass):
     os.environ["OCN2"] = "10.1.0.54"
     os.environ["localhost"] = "10.1.0.1"
     os.system("sudo pip install configobj")
+    os.system("sudo apt-get install -y sshpass")
     OnosPushKeys("onos-push-keys 10.1.0.1",masterpass)
     OnosPushKeys("onos-push-keys 10.1.0.50",agentpass)
     OnosPushKeys("onos-push-keys 10.1.0.53",agentpass)
@@ -167,6 +188,7 @@ if __name__=="__main__":
 
     print "Test Begin....."
     Gensshkey()
+    AddKarafUser("10.1.0.50","karaf","karaf")
     AddEnvIntoBashrc("source onos/tools/dev/bash_profile")
     SSHlogin("10.1.0.1",masterusername,masterpassword)
     ChangeOnosName(agentusername,agentpassword) 
@@ -174,4 +196,4 @@ if __name__=="__main__":
     CleanEnv()
     SetEnvVar(masterpassword,agentpassword)
     RunScript("FUNCvirNetNB",masterusername,masterpassword)
-    RunScript("FUNCovsdbtest",masterusername,masterpassword) 
+    RunScript("FUNCovsdbtest",masterusername,masterpassword)

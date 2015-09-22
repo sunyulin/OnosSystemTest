@@ -228,17 +228,14 @@ class OnosCliDriver( CLI ):
             self.handle.sendline( "" )
             x = self.handle.expect( [
                 "#|\$", "onos>" ], commandlineTimeout)
-
             if x == 1:
                 main.log.info( "ONOS cli is already running" )
                 return main.TRUE
-
             # Wait for onos start ( -w ) and enter onos cli
             self.handle.sendline( "onos -w " + str( ONOSIp ) )
             i = self.handle.expect( [
                 "onos>",
                 pexpect.TIMEOUT ], onosStartTimeout )
-
             if i == 0:
                 main.log.info( str( ONOSIp ) + " CLI Started successfully" )
                 if karafTimeout:

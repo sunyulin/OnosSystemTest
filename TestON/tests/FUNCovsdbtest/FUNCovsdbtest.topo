@@ -2,7 +2,7 @@
     <COMPONENT>
 
         <ONOSbench>
-            <host>OCN</host>
+            <host>localhost</host>
             <user>root</user>
             <password></password>
             <type>OnosDriver</type>
@@ -12,7 +12,7 @@
         </ONOSbench>
 
         <ONOScli1>
-            <host>OCN</host>
+            <host>localhost</host>
             <user>root</user>
             <password></password>
             <type>OnosCliDriver</type>
@@ -48,7 +48,7 @@
         </OVSDB1>
 
         <OVSDB2>
-            <host>OC1</host>
+            <host>OCN2</host>
             <user>root</user>
             <password></password>
             <type>OvsdbDriver</type>
