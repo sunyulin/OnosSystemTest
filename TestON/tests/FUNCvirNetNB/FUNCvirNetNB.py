@@ -17,7 +17,6 @@ CASE10 - Delete Virtualport northbound test
 lanqinglong@huawei.com
 """
 import os
-
 class FUNCvirNetNB:
 
     def __init__( self ):
@@ -265,6 +264,7 @@ class FUNCvirNetNB:
         Test Update Network
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
