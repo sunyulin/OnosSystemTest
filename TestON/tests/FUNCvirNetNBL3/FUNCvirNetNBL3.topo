@@ -4,7 +4,7 @@
         <ONOSrest>
             <host>OC1</host>
             <user>root</user>
-            <password>r00tme</password>
+            <password>root</password>
             <type>OnosRestDriver</type>
             <connect_order>4</connect_order>
             <COMPONENTS> </COMPONENTS>

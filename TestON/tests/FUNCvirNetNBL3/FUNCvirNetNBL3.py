@@ -200,6 +200,7 @@ class FUNCvirNetNBL3:
         """
         import os
         import json
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -239,6 +240,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'routers/',
@@ -248,6 +250,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
 
         main.step( "Get Router Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, router.id, path + 'routers/',
@@ -257,6 +260,7 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get Router Success",
                 onfail="Get Router Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Router Data is :%s"%(result))
 
         IDcmpresult = router.JsonCompare( routerpostdata, result, 'router', 'id' )
         TanantIDcmpresult = router.JsonCompare( routerpostdata, result, 'router', 'tenant_id' )
@@ -296,6 +300,7 @@ class FUNCvirNetNBL3:
         Test Update Router
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -339,6 +344,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'routers/',
@@ -348,6 +354,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
 
         main.step( "Update Router Data via HTTP" )
         Putstatus, result = main.ONOSrest.send( ctrlip, port, router.id, path + 'routers/',
@@ -357,6 +364,7 @@ class FUNCvirNetNBL3:
                 actual=Putstatus,
                 onpass="Update Router Success",
                 onfail="Update Router Failed " + str( Putstatus ) + "," + str( result ) )
+        main.log.info("Post New Router Data is :%s"%(newrouterpostdata))
 
         main.step( "Get Router Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, router.id, path + 'routers/',
@@ -366,6 +374,7 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get Router Success", 
                 onfail="Get Router Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Router Data is :%s"%(result))
 
         IDcmpresult = router.JsonCompare( newrouterpostdata, result, 'router', 'id' )
         TanantIDcmpresult = router.JsonCompare( newrouterpostdata, result, 'router', 'tenant_id' )
@@ -401,6 +410,7 @@ class FUNCvirNetNBL3:
         Test Delete Router
         """ 
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -442,6 +452,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'routers/',
@@ -451,6 +462,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
 
         main.step( "Delete Router Data via HTTP" )
         Deletestatus, result = main.ONOSrest.send( ctrlip, port, router.id, path + 'routers/',
@@ -462,6 +474,8 @@ class FUNCvirNetNBL3:
                 onfail="Delete Router Failed " + str( Deletestatus ) + "," + str( result ) )
 
         main.step( "Get Router Data is NULL" )
+        print "Verify the Router status"
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, port, router.id, path + 'routers/',
                                                  'GET', None, None )
         utilities.assert_equals(
@@ -480,6 +494,7 @@ class FUNCvirNetNBL3:
         Test Post RouterInterface
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -541,6 +556,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -550,6 +566,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -559,7 +576,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Port Data is :%s"%(portpostdata))
+
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
                                                  'POST', None, routerpostdata )
@@ -568,9 +586,9 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post router Success",
                 onfail="Post router Failed " + str( Poststatus ) + "," + str( result ) )
-                
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Put RouterInterface Data via HTTP")
-       
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/' +
                                                  router.id + '/add_router_interface/', 
                                                  'PUT', None, routerinterfacedata )
@@ -579,6 +597,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post RouterInterface Success",
                 onfail="Post RouterInterface Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post RouterInterface Data is :%s"%(routerinterfacedata))
 
         main.step( "Get RouterInterface Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -586,8 +605,9 @@ class FUNCvirNetNBL3:
         utilities.assert_equals(
                 expect='200',
                 actual=Getstatus,
-                onpass="Get Port Success",
+                onpass="Get Port Success" + str(result),
                 onfail="Get Port Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get RouterInterface Data is :%s"%(result))
 
         main.step( "Compare Post Port Data" )
         IDcmpresult = subnet.JsonCompare( portpostdata, result, 'port', 'id' )
@@ -642,6 +662,7 @@ class FUNCvirNetNBL3:
         Test Delete RouterInterface
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -701,6 +722,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -710,6 +732,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -719,7 +742,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Port Data is :%s"%(portpostdata))
+
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
                                                  'POST', None, routerpostdata )
@@ -728,7 +752,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post router Success",
                 onfail="Post router Failed " + str( Poststatus ) + "," + str( result ) )
-                
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Post RouterInterface Data via HTTP")
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/' +
                                                  router.id + '/add_router_interface/', 
@@ -738,6 +763,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post RouterInterface Success",
                 onfail="Post RouterInterface Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post RouterInterface Data is :%s"%(routerinterfacedata))
 
         main.step( "Del RouterInterface Data via HTTP")
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/' +
@@ -759,6 +785,8 @@ class FUNCvirNetNBL3:
                 onfail="Delete Port Failed " + str( Poststatus ) + "," + str( result ) )
 
         main.step( "Get Port Data is NULL" )
+        main.log.info("Verify RouterInterface status")
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
                                                  'GET', None, None )
         utilities.assert_equals(
@@ -794,6 +822,7 @@ class FUNCvirNetNBL3:
         Test Post FloatingIp
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -864,6 +893,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -873,6 +903,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -882,6 +913,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
@@ -891,6 +923,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
 
         main.step( "Get Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -910,6 +943,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post FloatingIp Success",
                 onfail="Post FloatingIp Failed " + str( Poststatus ) + "," + str( result ) ) 
+        main.log.info("Post FloatingIp Data is :%s"%(floatingippostdata))
 
         main.step( "Get Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -919,8 +953,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Get Port Success",
                 onfail="Get Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Get Port Data is :%s"%(result))
 
-       
         main.step( "Get FloatingIp Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'floatingips/',
                                                  'GET', None, None )
@@ -930,7 +964,8 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get FloatingIp Success",
                 onfail="Get FloatingIp Failed " + str( Getstatus ) + "," + str( result ) )
- 
+        main.log.info("Get FloatingIp Data is :%s"%(result))
+
         main.step( "Get FloatingIp Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'floatingips/' + 
                       floatingip.id +'?fields=id&fields=tenant_id',
@@ -998,6 +1033,7 @@ class FUNCvirNetNBL3:
         Test Update FloatingIp
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -1081,6 +1117,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -1090,6 +1127,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -1099,6 +1137,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
@@ -1108,7 +1147,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Post FloatingIp Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'floatingips/',
                                                  'POST', None, floatingippostdata )
@@ -1117,6 +1157,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post FloatingIp Success",
                 onfail="Post FloatingIp Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post FloatingIp Data is :%s"%(floatingippostdata))
 
         main.step( "Post Delete Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -1146,7 +1187,9 @@ class FUNCvirNetNBL3:
                 expect='200',
                 actual=Poststatus,
                 onpass="Post NewFloatingIp Success",
-                onfail="Post NewFloatingIp Failed " + str( Poststatus ) + "," + str( result ) )        
+                onfail="Post NewFloatingIp Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post New FloatingIp Data is :%s"%(nfloatingippostdata))
+
         main.step( "Get NewFloatingIp Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'floatingips/' +
                       floatingip.id +'?fields=id&fields=tenant_id&fields=port_id',
@@ -1156,6 +1199,7 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get NewFloatingIp Success:",
                 onfail="Get NewFloatingIp Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get FloatingIp Data is :%s"%(result))
 
         main.step( "Compare Post FloatingIp Data" )
         IDcmpresult = subnet.JsonCompare( nfloatingippostdata, result, 'floatingip', 'id' )
@@ -1214,6 +1258,7 @@ class FUNCvirNetNBL3:
         Test Delete FloatingIp
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -1284,6 +1329,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -1293,6 +1339,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -1302,6 +1349,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
@@ -1311,7 +1359,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Router Success",
                 onfail="Post Router Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Post FloatingIp Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'floatingips/',
                                                  'POST', None, floatingippostdata )
@@ -1320,7 +1369,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post FloatingIp Success",
                 onfail="Post FloatingIp Failed " + str( Poststatus ) + "," + str( result ) )
-
+        main.log.info("Post FloatingIp Data is :%s"%(floatingippostdata))
 
         main.step( "Post FloatingIp Clean Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, floatingip.id, path + 'floatingips/',
@@ -1341,6 +1390,8 @@ class FUNCvirNetNBL3:
                 onfail="Delete Floatingip Failed" )        
         
         main.step( "Get FloatingIp Data is NULL" )
+        main.log.info("Verify the FloatingIp status")
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, floatingip.id, path + 'floatingips/',
                                                  'GET', None, None )
         
@@ -1380,6 +1431,7 @@ class FUNCvirNetNBL3:
         Test Post Gateway
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -1438,6 +1490,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -1447,6 +1500,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -1456,7 +1510,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Port Data is :%s"%(portpostdata))
+
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
                                                  'POST', None, routerpostdata )
@@ -1465,7 +1520,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post router Success",
                 onfail="Post router Failed " + str( Poststatus ) + "," + str( result ) )
-                
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
 
         main.step( "Get Gateway Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, router.id, path + 'routers/',
@@ -1475,6 +1530,7 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get Gateway Success", 
                 onfail="Get Gateway Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Gateway Data is :%s"%(result))
 
         main.step( "Compare Post Gateway Data" )
         externalcmpresult = network.GatewayCompare(routerpostdata,result,'router','external_gateway_info','external_fixed_ips')
@@ -1512,6 +1568,7 @@ class FUNCvirNetNBL3:
         Test Update Gateway
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -1576,6 +1633,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -1585,6 +1643,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -1594,7 +1653,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Port Data is :%s"%(portpostdata))
+
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
                                                  'POST', None, routerpostdata )
@@ -1603,7 +1663,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post router Success",
                 onfail="Post router Failed " + str( Poststatus ) + "," + str( result ) )
-                
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Post New Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, router.id, path + 'routers/',
                                                  'PUT', None, newrouterpostdata )
@@ -1612,6 +1673,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post New router Success",
                 onfail="Post New router Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post New router Data is :%s"%(newrouterpostdata))
 
         main.step( "Get Gateway Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, router.id, path + 'routers/',
@@ -1621,6 +1683,7 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get Gateway Success",
                 onfail="Get Gateway Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Gateway Data is :%s"%(result))
 
         main.step( "Compare Post Gateway Data" )
         externalcmpresult = network.GatewayCompare(newrouterpostdata,result,'router','external_gateway_info','external_fixed_ips')
@@ -1660,6 +1723,7 @@ class FUNCvirNetNBL3:
         """
         import os
         import json
+        import time
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData
@@ -1723,6 +1787,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -1732,6 +1797,7 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -1741,7 +1807,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
-        
+        main.log.info("Post Port Data is :%s"%(portpostdata))
+
         main.step( "Post Router Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'routers/',
                                                  'POST', None, routerpostdata )
@@ -1750,8 +1817,8 @@ class FUNCvirNetNBL3:
                 actual=Poststatus,
                 onpass="Post router Success",
                 onfail="Post router Failed " + str( Poststatus ) + "," + str( result ) )
-        
-       
+        main.log.info("Post Router Data is :%s"%(routerpostdata))
+
         main.step( "Post Del Gateway Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, router.id, path + 'routers/',
                                                  'PUT', None, delgatewaypostdata )
@@ -1769,9 +1836,12 @@ class FUNCvirNetNBL3:
                 actual=Getstatus,
                 onpass="Get Gateway Success",
                 onfail="Get Gateway Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Gateway Data is :%s"%(result))
 
         main.step( "If Gateway Data is NULL" )
-      
+        main.log.info("Verify the Gateway status")
+        time.sleep(5)
+
         try:
             jsonresult = json.loads(result)  
         except ValueError:
@@ -1805,12 +1875,6 @@ class FUNCvirNetNBL3:
         
         if Cmpresult != True:
             main.log.error( "Post port compare failed" )
- 
- 
- 
- 
- 
- 
  
  
  

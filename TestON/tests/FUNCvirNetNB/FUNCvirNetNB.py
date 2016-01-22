@@ -17,6 +17,7 @@ CASE10 - Delete Virtualport northbound test
 lanqinglong@huawei.com
 """
 import os
+
 class FUNCvirNetNB:
 
     def __init__( self ):
@@ -223,6 +224,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Success",
                 onfail="Post Failed " + str( Poststatus ) + str( result ) )
+        main.log.info("Post Network Data is :%s"%(postdata))
 
         main.step( "Get Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, network.id, path+'networks/',
@@ -232,8 +234,7 @@ class FUNCvirNetNB:
                 actual=Getstatus,
                 onpass="Get Success",
                 onfail="Get Failed " + str( Getstatus ) + str( result ) )
-
-        main.log.info("Post Network Data is :%s\nGet Network Data is:%s"%(postdata,result))
+        main.log.info("Get Network Data is :%s"%(result))
 
         main.step( "Compare Send Id and Get Id" )
         IDcmpresult = network.JsonCompare( postdata, result, 'network', 'id' )
@@ -264,7 +265,6 @@ class FUNCvirNetNB:
         Test Update Network
         """
         import os
-        import time
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
@@ -301,6 +301,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Success",
                 onfail="Post Failed " + str( Poststatus ) + str( result ) )
+        main.log.info("Post Network Data is :%s"%(postdata))
 
         main.step( "Update Data via HTTP" )
         Updatestatus, result = main.ONOSrest.send( ctrlip, port, network.id, path+'networks/',
@@ -310,6 +311,7 @@ class FUNCvirNetNB:
                 actual=Updatestatus,
                 onpass="Update Success",
                 onfail="Update Failed " + str( Updatestatus ) + str( result ) )
+        main.log.info("Update Network Data is :%s"%(postdatanew))
 
         main.step( "Get Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, network.id, path+'networks/',
@@ -319,6 +321,7 @@ class FUNCvirNetNB:
                 actual=Getstatus,
                 onpass="Get Success",
                 onfail="Get Failed " + str( Getstatus ) + str( result ) )
+        main.log.info("Get Network Data is :%s"%(result))
 
         main.step( "Compare Update data." )
         IDcmpresult = network.JsonCompare( postdatanew, result, 'network', 'id' )
@@ -352,6 +355,7 @@ class FUNCvirNetNB:
         Test Delete Network
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
@@ -384,6 +388,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Success",
                 onfail="Post Failed " + str( Poststatus ) + str( result ) )
+        main.log.info("Post Network Data is :%s"%(postdata))
 
         main.step( "Delete Data via HTTP" )
         Deletestatus, result = main.ONOSrest.send( ctrlip, port, network.id, path+'networks/',
@@ -395,6 +400,8 @@ class FUNCvirNetNB:
                 onfail="Delete Failed " + str( Deletestatus ) + str( result ) )
 
         main.step( "Get Data is NULL" )
+        main.log.info("Verify the Network status")
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, port, network.id, path+'networks/',
                                                 'GET', None, None )
         utilities.assert_equals(
@@ -451,6 +458,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'subnets/',
@@ -460,6 +468,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Get Subnet Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, subnet.id, path + 'subnets/',
@@ -470,6 +479,7 @@ class FUNCvirNetNB:
                 onpass="Get Subnet Success",
                 onfail="Get Subnet Failed " + str( Getstatus ) + "," + str( result ) )
 
+        main.log.info("Get Subnet Data is :%s"%(result))
         IDcmpresult = subnet.JsonCompare( subnetpostdata, result, 'subnet', 'id' )
         TanantIDcmpresult = subnet.JsonCompare( subnetpostdata, result, 'subnet', 'tenant_id' )
         NetoworkIDcmpresult = subnet.JsonCompare( subnetpostdata, result, 'subnet', 'network_id' )
@@ -547,6 +557,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'subnets/',
@@ -556,6 +567,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Update Subnet Data via HTTP" )
         Putstatus, result = main.ONOSrest.send( ctrlip, port, subnet.id, path + 'subnets/',
@@ -565,6 +577,7 @@ class FUNCvirNetNB:
                 actual=Putstatus,
                 onpass="Update Subnet Success",
                 onfail="Update Subnet Failed " + str( Putstatus ) + "," + str( result ) )
+        main.log.info("Post NewSubnet Data is :%s"%(newsubnetpostdata))
 
         main.step( "Get Subnet Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, port, subnet.id, path + 'subnets/',
@@ -575,6 +588,7 @@ class FUNCvirNetNB:
                 onpass="Get Subnet Success",
                 onfail="Get Subnet Failed " + str( Getstatus ) + "," + str( result ) )
 
+        main.log.info("Get Subnet Data is :%s"%(result))
         IDcmpresult = subnet.JsonCompare( newsubnetpostdata, result, 'subnet', 'id' )
         TanantIDcmpresult = subnet.JsonCompare( newsubnetpostdata, result, 'subnet', 'tenant_id' )
         Poolcmpresult = subnet.JsonCompare( newsubnetpostdata, result, 'subnet', 'allocation_pools' )
@@ -607,6 +621,7 @@ class FUNCvirNetNB:
         Test Delete Subnet
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
@@ -646,6 +661,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, port, '', path + 'subnets/',
@@ -655,6 +671,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Delete Subnet Data via HTTP" )
         Deletestatus, result = main.ONOSrest.send( ctrlip, port, subnet.id, path + 'subnets/',
@@ -666,6 +683,8 @@ class FUNCvirNetNB:
                 onfail="Delete Subnet Failed " + str( Deletestatus ) + "," + str( result ) )
 
         main.step( "Get Subnet Data is NULL" )
+        main.log.info("Verify the Subnet status")
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, port, subnet.id, path + 'subnets/',
                                                  'GET', None, None )
         utilities.assert_equals(
@@ -729,6 +748,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -738,6 +758,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -747,6 +768,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Get Port Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -756,6 +778,7 @@ class FUNCvirNetNB:
                 actual=Getstatus,
                 onpass="Get Port Success",
                 onfail="Get Port Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get Port Data is :%s"%(result))
 
         main.step( "Compare Post Port Data" )
         IDcmpresult = subnet.JsonCompare( portpostdata, result, 'port', 'id' )
@@ -843,6 +866,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -852,6 +876,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -861,6 +886,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Update Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -870,6 +896,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Update Port Success",
                 onfail="Update Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post New Port Data is :%s"%(newportpostdata))
 
         main.step( "Get Port Data via HTTP" )
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -879,6 +906,7 @@ class FUNCvirNetNB:
                 actual=Getstatus,
                 onpass="Get Port Success",
                 onfail="Get Port Failed " + str( Getstatus ) + "," + str( result ) )
+        main.log.info("Get New Port Data is :%s"%(result))
 
         main.step( "Compare Update Port Data" )
         IDcmpresult = subnet.JsonCompare( portpostdata, result, 'port', 'id' )
@@ -914,6 +942,7 @@ class FUNCvirNetNB:
         Test Delete Port
         """
         import os
+        import time
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
@@ -960,6 +989,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Network Success",
                 onfail="Post Network Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Network Data is :%s"%(networkpostdata))
 
         main.step( "Post Subnet Data via HTTP(Post port need post subnet)" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'subnets/',
@@ -969,6 +999,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Subnet Success",
                 onfail="Post Subnet Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Subnet Data is :%s"%(subnetpostdata))
 
         main.step( "Post Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, '', path + 'ports/',
@@ -978,6 +1009,7 @@ class FUNCvirNetNB:
                 actual=Poststatus,
                 onpass="Post Port Success",
                 onfail="Post Port Failed " + str( Poststatus ) + "," + str( result ) )
+        main.log.info("Post Port Data is :%s"%(portpostdata))
 
         main.step( "Delete Port Data via HTTP" )
         Poststatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
@@ -989,6 +1021,8 @@ class FUNCvirNetNB:
                 onfail="Delete Port Failed " + str( Poststatus ) + "," + str( result ) )
 
         main.step( "Get Port Data is NULL" )
+        main.log.info("Verify the Port status")
+        time.sleep(5)
         Getstatus, result = main.ONOSrest.send( ctrlip, httpport, port.id, path + 'ports/',
                                                  'GET', None, None )
         utilities.assert_equals(
