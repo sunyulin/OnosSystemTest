@@ -201,6 +201,8 @@ class FUNCvirNetNBL3:
         import os
         import json
         import time
+        import logging
+        main.log.setLevel(logging.WARNING)
 
         try:
             from tests.FUNCvirNetNBL3.dependencies.Nbdata import NetworkData

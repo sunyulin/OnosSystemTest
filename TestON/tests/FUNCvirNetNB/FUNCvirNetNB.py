@@ -191,6 +191,8 @@ class FUNCvirNetNB:
         Test Post Network
         """
         import os
+        import logging
+        main.log.setLevel(logging.WARNING)
 
         try:
             from tests.FUNCvirNetNB.dependencies.Nbdata import NetworkData
