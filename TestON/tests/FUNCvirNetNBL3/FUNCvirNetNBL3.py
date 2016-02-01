@@ -215,7 +215,7 @@ class FUNCvirNetNBL3:
 
 
         main.log.info( "ONOS Router Post test Start" )
-        main.case( "Virtual Network NBI Test - Router" )
+        main.case( "Virtual Network NBI Test - Router Post" )
         main.caseExplanation = "Test Router Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -314,7 +314,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS Router Update test Start" )
-        main.case( "Virtual Network NBI Test - Subnet" )
+        main.case( "Virtual Network NBI Test - Router Update" )
         main.caseExplanation = "Test Router Update NBI " +\
                                 "Verify Stored Data is same with Update Data"
 
@@ -424,7 +424,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS Router Delete test Start" )
-        main.case( "Virtual Network NBI Test - Router" )
+        main.case( "Virtual Network NBI Test - Router Delete" )
         main.caseExplanation = "Test Router Delete NBI " +\
                                 "Verify Stored Data is Null after Delete"
 
@@ -513,7 +513,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS RouterInterface Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - RouterInterface Post" )
         main.caseExplanation = "Test RouterInterface Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -679,7 +679,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS RouterInterface Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - RouterInterface Delete" )
         main.caseExplanation = "Test RouterInterface Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -839,7 +839,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS FloatingIp Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - FloatingIp Post" )
         main.caseExplanation = "Test FloatingIp Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -1050,7 +1050,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS FloatingIp Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - FloatingIp Update" )
         main.caseExplanation = "Test FloatingIp Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -1275,7 +1275,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS FloatingIp Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - FloatingIp Delete" )
         main.caseExplanation = "Test FloatingIp Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -1448,7 +1448,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS RouterInterface Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Gateway Post" )
         main.caseExplanation = "Test RouterInterface Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -1585,7 +1585,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS RouterInterface Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Gateway Update" )
         main.caseExplanation = "Test RouterInterface Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -1740,7 +1740,7 @@ class FUNCvirNetNBL3:
             main.exit()
 
         main.log.info( "ONOS RouterInterface Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Gateway Delete" )
         main.caseExplanation = "Test RouterInterface Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 

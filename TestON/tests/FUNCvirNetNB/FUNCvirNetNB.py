@@ -203,7 +203,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Network Post test Start" )
-        main.case( "Virtual Network NBI Test - Network" )
+        main.case( "Virtual Network NBI Test - Network Post" )
         main.caseExplanation  = "Test Network Post NBI " +\
                                 "Verify Post Data same with Stored Data"
 
@@ -277,7 +277,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Network Update test Start" )
-        main.case( "Virtual Network NBI Test - Network" )
+        main.case( "Virtual Network NBI Test - Network Update" )
         main.caseExplanation  = "Test Network Update NBI " +\
                                 "Verify Update Data same with Stored Data"
 
@@ -368,7 +368,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Network Delete test Start" )
-        main.case( "Virtual Network NBI Test - Network" )
+        main.case( "Virtual Network NBI Test - Network Delete" )
         main.caseExplanation = "Test Network Delete NBI " +\
                                 "Verify Stored Data is NULL after Delete"
 
@@ -432,7 +432,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Subnet Post test Start" )
-        main.case( "Virtual Network NBI Test - Subnet" )
+        main.case( "Virtual Network NBI Test - Subnet Post" )
         main.caseExplanation = "Test Subnet Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -524,7 +524,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Subnet Update test Start" )
-        main.case( "Virtual Network NBI Test - Subnet" )
+        main.case( "Virtual Network NBI Test - Subnet Update" )
         main.caseExplanation = "Test Subnet Update NBI " +\
                                 "Verify Stored Data is same with Update Data"
 
@@ -635,7 +635,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Subnet Delete test Start" )
-        main.case( "Virtual Network NBI Test - Subnet" )
+        main.case( "Virtual Network NBI Test - Subnet Delete" )
         main.caseExplanation = "Test Subnet Delete NBI " +\
                                 "Verify Stored Data is Null after Delete"
 
@@ -716,7 +716,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Port Post test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Port Post" )
         main.caseExplanation = "Test Port Post NBI " +\
                                 "Verify Stored Data is same with Post Data"
 
@@ -828,7 +828,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Port Update test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Port Update" )
         main.caseExplanation = "Test Port Update NBI " +\
                                 "Verify Stored Data is same with New Post Data"
 
@@ -957,7 +957,7 @@ class FUNCvirNetNB:
             main.exit()
 
         main.log.info( "ONOS Port Delete test Start" )
-        main.case( "Virtual Network NBI Test - Port" )
+        main.case( "Virtual Network NBI Test - Port Delete" )
         main.caseExplanation = "Test Port Delete NBI " +\
                                 "Verify port delete success"
 
